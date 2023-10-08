@@ -26,19 +26,28 @@ export default function Home() {
 
 
     return (
-        <main className="flex min-h-screen flex-col items-center justify-between p-24">
-            {preferences && preferences.map((preference, id) => (
-                <div>
-                    <input value={preference.title} onChange={(e) => handlePreferenceTitleChange(e.target.value, id)}>
-                    </input>
-                    <input value={preference.contains}
-                           onChange={(e) => handlePreferenceTitleChange(e.target.value, id)}>
-                    </input>
-                    <button onClick={}>remove</button>
-                </div>
-            ))}
-            <button onClick={}>add</button>
-
-        </main>
+        <div>
+            <h1>Preferences</h1>
+            {preferences?.map((preference, index) => {
+                return (
+                    <div key={index}>
+                        <input placeholder={"food name"} type="text" value={preference.title}
+                               onChange={(e) => handlePreferenceTitleChange(e, index)}/>
+                        <input placeholder={"suroviny"} type="text" value={preference.contains}/>
+                    </div>
+                )
+            })}
+            <button onClick={() => {
+                setPreferences(last => {
+                    if (last) {
+                        return [...last, {title: '', contains: ''}]
+                    } else {
+                        return [{title: '', contains: ''}]
+                    }
+                })
+            }}>
+                Add Preference
+            </button>
+        </div>
     )
 }
