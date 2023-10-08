@@ -1,7 +1,7 @@
 'use client'
 import Image from 'next/image'
 import {useState} from 'react'
-
+import { Icon } from '@iconify/react';
 export default function Home() {
     type Preferences = [
         {
@@ -30,10 +30,13 @@ export default function Home() {
             <h1>Preferences</h1>
             {preferences?.map((preference, index) => {
                 return (
-                    <div key={index}>
+                    <div className={"flex items-center justify-center"} key={index}>
                         <input placeholder={"food name"} type="text" value={preference.title}
                                onChange={(e) => handlePreferenceTitleChange(e, index)}/>
                         <input placeholder={"suroviny"} type="text" value={preference.contains}/>
+                        <div className={"cursor-pointer bg-red-300 text-red-500 rounded shadow"} onClick={()=>{
+
+                        }}><Icon icon={"ph:x-bold"}/></div>
                     </div>
                 )
             })}
