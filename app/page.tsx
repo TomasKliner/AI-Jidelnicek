@@ -35,7 +35,11 @@ export default function Home() {
                                onChange={(e) => handlePreferenceTitleChange(e, index)}/>
                         <input placeholder={"suroviny"} type="text" value={preference.contains}/>
                         <div className={"cursor-pointer bg-red-300 text-red-500 rounded shadow"} onClick={()=>{
-
+                            setPreferences(last => {
+                                return last.filter((preference: any, i: number) => {
+                                    return i !== index
+                                })
+                            })
                         }}><Icon icon={"ph:x-bold"}/></div>
                     </div>
                 )
