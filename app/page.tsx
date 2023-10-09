@@ -30,11 +30,11 @@ export default function Home() {
             <h1>Preferences</h1>
             {preferences?.map((preference, index) => {
                 return (
-                    <div className={"flex items-center justify-center"} key={index}>
-                        <input placeholder={"food name"} type="text" value={preference.title}
+                    <div className={"flex items-center justify-center gap-1"} key={index}>
+                        <input className={"input input-primary"} placeholder={"food name"} type="text" value={preference.title}
                                onChange={(e) => handlePreferenceTitleChange(e, index)}/>
-                        <input placeholder={"suroviny"} type="text" value={preference.contains}/>
-                        <div className={"cursor-pointer bg-red-300 text-red-500 rounded shadow"} onClick={()=>{
+                        <input className={"input input-primary"} placeholder={"suroviny"} type="text" value={preference.contains}/>
+                        <div className={"cursor-pointer btn btn-error"} onClick={()=>{
                             setPreferences(last => {
                                 return last.filter((preference: any, i: number) => {
                                     return i !== index
