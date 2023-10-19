@@ -17,7 +17,7 @@ export async function POST(req: NextRequest) {
     try {
         let result = await openai.chat.completions.create({
             model: "gpt-3.5-turbo",
-            messages: [{role: 'user', content: body?.prompt}],
+            messages: [{role: 'user', content: body?.prompt}, {role: 'system', content: '1 food, response as only json with foodname and description'}],
         })
         console.log(result)
         return Response.json(result)

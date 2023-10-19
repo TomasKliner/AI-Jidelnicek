@@ -9,6 +9,7 @@ export default function Meal() {
 
     function handleSubmit(e) {
         e.preventDefault()
+        setSystemText("loading...")
         fetch('/api/meal', {
             method: 'POST',
             headers: {
@@ -19,7 +20,8 @@ export default function Meal() {
             })
         }).then(response => response.json())
             .then(data => {
-                const response = data?.choices[0]?.text
+                const response = data?.choices[0]?.message.content
+                setSystemText(response)
                 console.log(response)
             })
             .catch(error => console.log('error: ', error))
