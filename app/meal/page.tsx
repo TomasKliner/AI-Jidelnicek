@@ -19,8 +19,8 @@ export default function Meal() {
             })
         }).then(response => response.json())
             .then(data => {
-                console.log(data)
-                setSystemText(data.choices[0].text)
+                const response = data?.choices[0]?.text
+                console.log(response)
             })
             .catch(error => console.log('error: ', error))
     }

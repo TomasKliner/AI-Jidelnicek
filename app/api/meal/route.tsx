@@ -3,8 +3,9 @@ import {OpenAI} from "openai";
 
 export async function POST(req: NextRequest) {
     const body = await req.json()
-    if (!body?.prompt || body.prompt !== 'string' || body.prompt.length < 1)
+    if (!body?.prompt)
     {
+        console.log(body)
         return new Response('Bad Request', {status: 400})
     }
 
@@ -18,7 +19,8 @@ export async function POST(req: NextRequest) {
             model: "gpt-3.5-turbo",
             messages: [{role: 'user', content: body?.prompt}],
         })
-        return new Response(JSON.stringify(result), {status: 200})
+        console.log(result)
+        return Response.json(result)
     } catch (e) {
         console.log(e)
         return new Response('Internal Server Error', {status: 500})
