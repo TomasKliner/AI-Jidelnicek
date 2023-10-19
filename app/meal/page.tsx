@@ -1,11 +1,29 @@
 'use client'
 import {TextareaAutosize, TextField, Button} from "@mui/material";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 
 export default function Meal() {
     const [userText, setUserText] = useState('')
     const [systemText, setSystemText] = useState('')
+
+    function handleSubmit(e) {
+        e.preventDefault()
+        fetch('/api/meal', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                prompt: userText
+            })
+        }).then(response => response.json())
+            .then(data => {
+                console.log(data)
+                setSystemText(data.choices[0].text)
+            })
+            .catch(error => console.log('error: ', error))
+    }
 
     return (
         <div>
@@ -17,7 +35,8 @@ export default function Meal() {
                 <TextField id="label" variant="outlined" label={"system message:"}
                            value={systemText} onChange={(e) => setSystemText(e.target.value)}
                            className={"w-full"}/>
-                <Button type={"submit"} variant={"outlined"} className={"w-full"}>Submit</Button>
+                <Button type={"submit"} variant={"outlined"} className={"w-full"}
+                        onClick={(e) => handleSubmit(e)}>Submit</Button>
             </div>
         </div>
     )
