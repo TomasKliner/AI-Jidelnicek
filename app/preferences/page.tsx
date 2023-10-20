@@ -20,6 +20,7 @@ export default function Preferences() {
     type Preferences = [
         {
             title: string,
+            description: string,
             contains: string,
         }
     ]
@@ -42,7 +43,14 @@ export default function Preferences() {
 
     return (
         <div>
-            <h1 className={"text-4xl font-black text-center p-4 mt-8"}>My preferences</h1>
+            <div className={"flex items-center justify-center p-4 mt-8"}>
+                <h1 className={"text-4xl font-black text-center"}>My preferences</h1>
+                <div className={"btn btn-ghost flex justify-centter items-center tooltip"}
+                data-tip={"Edit Meal Sections"}>
+                    <Icon icon={"fa-solid:edit"} className={"w-6 h-6"}/>
+                </div>
+            </div>
+
             <section className={""}>
                 <div className={"flex flex-col md:flex-row gap-2 justify-center"}>
                     {daysSections.map((section, index) => {
@@ -59,7 +67,7 @@ export default function Preferences() {
                 <Autocomplete
                     id="free-solo-demo"
                     freeSolo
-                    options={preferences.map((option) => option.title)}
+                    options={preferences ? preferences.map((option) => option.title) : []}
                     renderInput={(params) => <TextField {...params} label="Search your preferences:"/>}
                 />
             </section>
@@ -74,9 +82,9 @@ export default function Preferences() {
             <button onClick={() => {
                 setPreferences(last => {
                     if (last) {
-                        return [...last, {title: '', contains: ''}]
+                        return [...last, {title: '', contains: '', description: ''}]
                     } else {
-                        return [{title: '', contains: ''}]
+                        return [{title: '', contains: '', description: ''}]
                     }
                 })
             }}>
