@@ -1,6 +1,7 @@
 'use client'
 import {Icon} from "@iconify/react";
 import Link from "next/link";
+import Image from "next/image";
 
 
 const pages = [
@@ -36,12 +37,16 @@ export default function Navbar() {
                     </label>
                     <ul tabIndex={0}
                         className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52 shadow">
-                        {pages.map((page, index) => <li key={page.href}><Link href={page.href}>{page.title}</Link></li>)}
+                        {pages.map((page, index) => <li key={page.href}><Link href={page.href}>{page.title}</Link>
+                        </li>)}
                     </ul>
                 </div>
             </div>
             <div className="lg:navbar-start w-fit">
-                <Link href={"/"} className="btn btn-ghost normal-case text-xl">AI Meal Plan</Link>
+                <Link href={"/"} className="btn btn-ghost normal-case text-xl flex items-center">
+                    <Image className={"w-8"} src={"/logoSmall.png"} alt={"logo"} width={48} height={48}/>
+                    <span>AI Meal Plan</span>
+                </Link>
             </div>
             <div className={"navbar-center hidden lg:flex justify-center text-center"}>
                 {pages.map((page, index) => {
