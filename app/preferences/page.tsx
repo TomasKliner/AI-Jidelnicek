@@ -1,8 +1,22 @@
 'use client'
 import Image from 'next/image'
 import {useState} from 'react'
-import { Icon } from '@iconify/react';
+import {Icon} from '@iconify/react';
+import Section from "@/components/Section";
+import {Search} from "@mui/icons-material";
+import TextField from '@mui/material/TextField';
+import Stack from '@mui/material/Stack';
+import Autocomplete from '@mui/material/Autocomplete';
+
 export default function Preferences() {
+    const daysSections = [
+        "Breakfast",
+        "Morning Snack",
+        "Lunch",
+        "Afternoon Snack",
+        "Dinner",
+    ] //TODO : user editable
+
     type Preferences = [
         {
             title: string,
@@ -11,6 +25,7 @@ export default function Preferences() {
     ]
 
     const [preferences, setPreferences] = useState<Preferences>();
+    const [selectedDaySection, setSelectedDaySection] = useState<string>(daysSections[0])
 
     function handlePreferenceTitleChange(e: any, id: number) {
         setPreferences(last => {
@@ -27,23 +42,35 @@ export default function Preferences() {
 
     return (
         <div>
-            <h1>Preferences</h1>
-            {preferences?.map((preference, index) => {
-                return (
-                    <div className={"flex items-center justify-center gap-1"} key={index}>
-                        <input className={"input input-primary"} placeholder={"food name"} type="text" value={preference.title}
-                               onChange={(e) => handlePreferenceTitleChange(e, index)}/>
-                        <input className={"input input-primary"} placeholder={"suroviny"} type="text" value={preference.contains}/>
-                        <div className={"cursor-pointer btn btn-error"} onClick={()=>{
-                            setPreferences(last => {
-                                return last.filter((preference: any, i: number) => {
-                                    return i !== index
-                                })
-                            })
-                        }}><Icon icon={"ph:x-bold"}/></div>
-                    </div>
-                )
-            })}
+            <h1 className={"text-4xl font-black text-center p-4 mt-8"}>My preferences</h1>
+            <section className={""}>
+                <div className={"flex flex-col md:flex-row gap-2 justify-center"}>
+                    {daysSections.map((section, index) => {
+                        return (
+                            <button
+                                className={(selectedDaySection === section ? "btn-primary " : " btn-ghost") + " btn"}
+                                onClick={() => setSelectedDaySection(section)}
+                            >{section}</button>
+                        )
+                    })}
+                </div>
+            </section>
+            <section id={"search"} className={"w-1/2 mx-auto p-2"}>
+                <Autocomplete
+                    id="free-solo-demo"
+                    freeSolo
+                    options={preferences.map((option) => option.title)}
+                    renderInput={(params) => <TextField {...params} label="Search your preferences:"/>}
+                />
+            </section>
+            <section className={"flex flex-col gap-2 p-2 "}>
+                {preferences?.map((preference, index) => {
+                    return (
+                        <Section title={selectedDaySection}/>
+
+                    )
+                })}
+            </section>
             <button onClick={() => {
                 setPreferences(last => {
                     if (last) {
