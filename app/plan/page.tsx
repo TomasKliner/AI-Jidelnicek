@@ -5,6 +5,7 @@ import {useState} from "react";
 import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
 import {AdapterDayjs} from '@mui/x-date-pickers/AdapterDayjs';
 import {DateCalendar} from '@mui/x-date-pickers/DateCalendar';
+import {TextField} from "@mui/material";
 
 export default function Plan() {
     const today = new Date()
@@ -15,7 +16,7 @@ export default function Plan() {
         "Lunch",
         "Snack",
         "Dinner",
-    ]
+    ] //TODO : user editable
 
     return (
         <div>
@@ -61,10 +62,13 @@ function Section({title, children}) {
                 </div>
             </div>
 
-            <div className={"w-full"}>
-                <input className={"input input-primary w-full"}
-                       type={"text"}
-                       placeholder={"your food goes here"}/>
+            <div className={"w-full flex flex-col gap-2"}>
+                {/*<TextField id="label" variant="outlined" label={"name:"}*/}
+                {/*           className={"w-full bg-white"}/>*/}
+                <input className={"input input-bordered input-primary w-full"}
+                          placeholder={"food name"}/>
+                <textarea className={"textarea textarea-bordered textarea-secondary w-full"}
+                            placeholder={"food description"}/>
             </div>
         </section>
     )
