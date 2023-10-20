@@ -36,7 +36,7 @@ export default function Navbar() {
                     </label>
                     <ul tabIndex={0}
                         className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52 shadow">
-                        {pages.map((page, index) => <li><Link href={page.href}>{page.title}</Link></li>)}
+                        {pages.map((page, index) => <li key={page.href}><Link href={page.href}>{page.title}</Link></li>)}
                     </ul>
                 </div>
             </div>
@@ -46,7 +46,7 @@ export default function Navbar() {
             <div className={"navbar-center hidden lg:flex justify-center text-center"}>
                 {pages.map((page, index) => {
                     return (
-                        <Link href={page.href} className={"btn btn-ghost"}>{page.title}</Link>
+                        <Link key={page.href} href={page.href} className={"btn btn-ghost"}>{page.title}</Link>
                     )
                 })}
             </div>
