@@ -4,7 +4,6 @@ export default function Section({title, children}) {
         <section id={title} className={"rounded-box bg-slate-200 p-2"}>
             <div className={"flex flex-col md:flex-row gap-2 justify-between"}>
                 {title && <h2 className={"text-2xl font-bold text-left p-2"}>{title}</h2>}
-
                 <div className={"flex gap-2 justify-end"}>
                     <div className={"btn btn-sm md:btn-md btn-ghost tooltip tooltip-primary flex justify-center items-center"}
                          data-tip={"Generate food idea"}>
